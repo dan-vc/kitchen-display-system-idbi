@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import { OrderCard } from './components/OrderCard';
+import { OrderCard } from './components/OrderCard/OrderCard';
 import type { Order, OrderStatus } from './types';
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from './state/store';
+import { useEffect } from 'react';
 import { addOrder } from './state/orders/ordersSlice';
 
 const Container = styled.div`
@@ -44,8 +44,6 @@ const Wrapper = styled.div`
 `;
 
 
-
-
 function App() {
   const dispatch = useDispatch();
   // Obtenemos los pedidos desde el estado global
@@ -65,13 +63,13 @@ function App() {
       { id: 'i2', name: 'Papas Fritas', quantity: 1, notes: 'Sin sal' },
     ],
   }
-  useEffect(() => {
+/*   useEffect(() => {
     const interval = setInterval(() => {
       dispatch(addOrder(testOrder));
-    }, 5000);
+    }, 20000);
 
     return () => clearInterval(interval);
-  }, [])
+  }, []) */
 
 
   // Pedidos activos (excluimos los que están listos)
