@@ -19,9 +19,6 @@ const Actions = styled.div`
   gap: .5rem;
 `;
 
-const StartButton = styled(Button)`
-`;
-
 const FinishButton = styled(Button)`
   background-color: var(--color-ready);
 
@@ -31,10 +28,10 @@ const FinishButton = styled(Button)`
 `;
 
 const DangerButton = styled(Button)`
-  background-color: #f63b3b;
+  background-color: var(--color-danger);
 
   &:hover {
-    background-color: #eb2525;
+    background-color: var(--color-danger-hover);
   }
 `;
 
@@ -48,27 +45,18 @@ interface Props {
 export const OrderActions = ({ id, status }: Props) => {
   const dispatch = useDispatch();
 
-  function handleStartButton() {
-    dispatch(updateOrderStatus({
-      id: id,
-      status: 'cooking'
-    }))
-  }
-  function handleFinishButton() {
-    dispatch(updateOrderStatus({
-      id: id,
-      status: 'ready'
-    }))
-  }
+  const changeStatus = (newStatus: OrderStatus) => {
+    dispatch(updateOrderStatus({ id, status: newStatus }));
+  };
 
   return (
     <Actions>
       {status === 'pending' ?
-        <StartButton onClick={() => handleStartButton()}>
+        <Button onClick={() => changeStatus('cooking')}>
           Iniciar
-        </StartButton>
+        </Button>
         :
-        <FinishButton onClick={() => handleFinishButton()}>
+        <FinishButton onClick={() => changeStatus('ready')}>
           Completar
         </FinishButton>
       }

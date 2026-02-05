@@ -2,10 +2,12 @@
     --color-pending: #9ca0a5;
     --color-cooking: #e69100;
     --color-ready: #02bb46;
+    --color-danger: #f63b3b;
     
     --color-pending-hover: #8e9297;
     --color-cooking-hover: #cc8101;
     --color-ready-hover: #01a13c;
+    --color-danger: #eb2525;
 
 }
 
