@@ -19,7 +19,8 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: center;
   padding: .5rem 1rem;
-  background: #fff;
+  background: var(--color-ready);
+  color: #fff;
 
   @media (max-width: 600px){
     flex-direction: column;
@@ -110,8 +111,8 @@ function App() {
     <Container>
       <Header >
         <Title>
-          <span>KDS</span>
-          <span> - {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+          ChefStack SDK
+          - {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
         </Title>
 
         <CurrentOrders>
