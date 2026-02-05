@@ -16,7 +16,8 @@ padding: 1rem;
 background: ${props =>
     props.$status === 'ready' ? 'var(--color-ready)' :
     props.$status === 'cooking' ? 'var(--color-cooking)' :
-    'var(--color-pending)'};
+    props.$status === 'pending' ? 'var(--color-pending)' :
+    'var(--color-danger)'};
 color: #fff;
 border-bottom: 1px solid #e2e8f0;
 padding-bottom: 8px;

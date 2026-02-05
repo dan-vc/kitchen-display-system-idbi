@@ -1,4 +1,4 @@
-export type OrderStatus = 'pending' | 'cooking' | 'ready';
+export type OrderStatus = 'pending' | 'cooking' | 'ready' | 'cancelled';
 
 export type OrderType = 'local' | 'delivery' | 'takeout';
 

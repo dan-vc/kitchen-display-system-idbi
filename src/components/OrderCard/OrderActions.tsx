@@ -60,7 +60,11 @@ export const OrderActions = ({ id, status }: Props) => {
           Completar
         </FinishButton>
       }
-      <DangerButton onClick={() => ''}>
+      <DangerButton onClick={() => {
+        if (confirm(`¿Seguro que quieres cancelar el pedido ${id}?`)) {
+          dispatch(updateOrderStatus({ id, status: "cancelled" }));
+        }
+      }}>
         Cancelar
       </DangerButton>
     </Actions>

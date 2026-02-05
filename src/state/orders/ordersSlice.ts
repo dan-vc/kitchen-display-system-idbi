@@ -2,7 +2,7 @@
     Slice para el estado global de los pedidos
 
     - Contiene todos los pedidos
-    - Expone actions:
+    - Expone los actions:
         - Agregar pedidos
         - Actualizar el estado del pedido
         - Actualizar el Filtro de los pedidos

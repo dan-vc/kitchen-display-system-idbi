@@ -3,7 +3,7 @@ import { OrderCard } from './components/OrderCard/OrderCard';
 import type { Order, OrderStatus } from './types';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from './state/store';
-import { act, useEffect } from 'react';
+import { useEffect } from 'react';
 import { addOrder } from './state/orders/ordersSlice';
 import { OrdersFilterBar } from './components/OrdersFilterBar';
 
@@ -58,7 +58,7 @@ function App() {
   // Obtenemos los pedidos desde el estado global
   const orders = useSelector((state: RootState) => state.orders.value);
   const actualFilter = useSelector((state: RootState) => state.orders.filter);
-  const filteredOrders = actualFilter === 'all' ? orders : orders.filter(o => o.status === actualFilter );
+  const filteredOrders = actualFilter === 'all' ? orders : orders.filter(o => o.status === actualFilter);
 
   const dispatch = useDispatch();
 
@@ -75,13 +75,13 @@ function App() {
       { id: 'i2', name: 'Papas Fritas', quantity: 1, notes: 'Sin sal' },
     ],
   }
-    useEffect(() => {
-      const interval = setTimeout(() => {
-        dispatch(addOrder(testOrder));
-      }, 5000);
-  
-      return () => clearTimeout(interval);
-    }, [])
+  useEffect(() => {
+    const interval = setTimeout(() => {
+      dispatch(addOrder(testOrder));
+    }, 5000);
+
+    return () => clearTimeout(interval);
+  }, [])
 
 
   // Pedidos activos (excluimos los que están listos)
@@ -92,6 +92,7 @@ function App() {
     pending: 1,
     cooking: 2,
     ready: 3,
+    cancelled: 4,
   };
 
   // Ordenamos los pedidos por prioridad y tipo
@@ -118,7 +119,7 @@ function App() {
         </CurrentOrders>
       </Header>
 
-      <OrdersFilterBar 
+      <OrdersFilterBar
         actualFilter={actualFilter}
       />
 

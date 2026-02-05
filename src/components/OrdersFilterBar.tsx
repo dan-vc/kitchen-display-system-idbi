@@ -40,6 +40,7 @@ border-color: ${props =>
     props.$status === 'cooking' ? 'var(--color-cooking)' :
     props.$status === 'pending' ? 'var(--color-pending)' : 
     '#222'};
+    
 &:hover,
 &.active{
 background: ${props =>

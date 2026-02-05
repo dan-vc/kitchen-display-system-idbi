@@ -28,8 +28,9 @@ const Card = styled.div<{ $status: string }>`
   border-color: ${props =>
     props.$status === 'ready' ? 'var(--color-ready)' :
     props.$status === 'cooking' ? 'var(--color-cooking)' :
-    'var(--color-pending)'};
-  opacity: ${props => props.$status === 'ready' ? .9 : 1};
+    props.$status === 'pending' ? 'var(--color-pending)' :
+    'var(--color-danger)'};
+  opacity: ${props => props.$status === 'cancelled' ? .5 : 1};
 `;
 
 // Tipado de Props
@@ -40,7 +41,7 @@ interface Props {
 // Componente Funcional
 export const OrderCard = ({ order }: Props) => {
   const timeString = new Date(order.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  const isOrderReady = order.status === 'ready';
+  const isOrderActive = order.status != 'ready' && order.status != 'cancelled';
 
   return (
     <Card $status={order.status}>
@@ -57,7 +58,7 @@ export const OrderCard = ({ order }: Props) => {
         items={order.items}
       />
 
-      {!isOrderReady ?
+      {isOrderActive ?
         <OrderActions
           id={order.id}
           status={order.status}
