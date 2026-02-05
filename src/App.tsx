@@ -1,7 +1,10 @@
 import styled from 'styled-components';
 import { OrderCard } from './components/OrderCard';
 import type { Order, OrderStatus } from './types';
-import { useState } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import type { RootState } from './state/store';
+import { addOrder } from './state/orders/ordersSlice';
 
 const Container = styled.div`
   width: 100%;
@@ -40,83 +43,36 @@ const Wrapper = styled.div`
   gap: 1rem;
 `;
 
-export const MOCK_ORDERS: Order[] = [
-  {
+
+
+
+function App() {
+  const dispatch = useDispatch();
+  // Obtenemos los pedidos desde el estado global
+  const orders = useSelector((state: RootState) => state.orders.value);
+
+
+  // Simulamos un nuevo pedido
+  const testOrder: Order = {
     id: 'ORD0001',
-    tableNumber: 5,
+    tableNumber: Math.floor(Math.random() * 20) + 1,
     type: 'local',
     customer: 'Walter White',
     status: 'pending',
-    startTime: Date.now() - 1000 * 60 * 5,
+    startTime: Date.now(),
     items: [
       { id: 'i1', name: 'Hamburguesa Clásica', quantity: 2, notes: 'Sin pepinillos, doble queso.' },
       { id: 'i2', name: 'Papas Fritas', quantity: 1, notes: 'Sin sal' },
     ],
-  },
-  {
-    id: 'ORD0002',
-    tableNumber: 2,
-    type: 'local',
-    customer: 'Jesse Pinkman',
-    status: 'cooking',
-    startTime: Date.now() - 1000 * 60 * 15,
-    items: [
-      { id: 'i3', name: 'Hamburguesa BBQ', quantity: 1 },
-      { id: 'i4', name: 'Gaseosa Grande', quantity: 2, notes: 'Coca-Cola' },
-    ],
-  },
-  {
-    id: 'ORD0003',
-    type: 'delivery',
-    customer: 'Saul Goodman',
-    status: 'pending',
-    startTime: Date.now() - 1000 * 60 * 2,
-    items: [
-      { id: 'i5', name: 'Combo Familiar', quantity: 1, notes: 'Agregar 2 salsas extras' },
-      { id: 'i6', name: 'Alitas Picantes', quantity: 12 },
-    ],
-  },
-  {
-    id: 'ORD0004',
-    tableNumber: 8,
-    type: 'local',
-    customer: 'Gustavo Fring',
-    status: 'ready',
-    startTime: Date.now() - 1000 * 60 * 25,
-    items: [
-      { id: 'i7', name: 'Pollo a la Brasa', quantity: 1 },
-      { id: 'i8', name: 'Ensalada Fresca', quantity: 1, notes: 'Sin tomate' },
-    ],
-  },
-  {
-    id: 'ORD0005',
-    type: 'takeout',
-    customer: 'Mike Ehrmantraut',
-    status: 'cooking',
-    startTime: Date.now() - 1000 * 60 * 40,
-    items: [
-      { id: 'i9', name: 'Doble Cheeseburger', quantity: 1 },
-      { id: 'i10', name: 'Papas Deluxe', quantity: 1 },
-      { id: 'i11', name: 'Malteada de Vainilla', quantity: 1 },
-    ],
-  },
-  {
-    id: 'ORD0006',
-    type: 'delivery',
-    customer: 'Skyler White',
-    status: 'pending',
-    startTime: Date.now() - 1000 * 60 * 1,
-    items: [
-      { id: 'i12', name: 'Wrap Mediterráneo', quantity: 1 },
-      { id: 'i13', name: 'Limonada Frozen', quantity: 2 },
-    ],
   }
-];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      dispatch(addOrder(testOrder));
+    }, 5000);
 
+    return () => clearInterval(interval);
+  }, [])
 
-function App() {
-  // Usamos un estado local temporal solo para probar
-  const [orders] = useState<Order[]>(MOCK_ORDERS);
 
   // Pedidos activos (excluimos los que están listos)
   const currentOrders = orders.reduce((count, el) => {
@@ -124,12 +80,15 @@ function App() {
     return count;
   }, 0)
 
+
+  // Prioridad del pedido segun su estado
   const orderPriority: Record<OrderStatus, number> = {
     pending: 1,
     cooking: 2,
     ready: 3,
   };
 
+  // Ordenamos los pedidos por prioridad y tipo
   const sortedOrders = [...orders].sort((a, b) => {
     // Primero por prioridad del estado
     if (orderPriority[a.status] !== orderPriority[b.status]) {

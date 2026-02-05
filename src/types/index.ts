@@ -20,6 +20,6 @@ export interface Order {
 }
 
 export interface OrdersState {
-  orders: Order[];
+  value: Order[];
   filter: OrderStatus | 'all';
 }
