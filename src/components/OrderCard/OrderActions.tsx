@@ -3,7 +3,8 @@ import styled from "styled-components"
 import { updateOrderStatus } from "../../state/orders/ordersSlice";
 import type { OrderStatus } from "../../types";
 
-const Options = styled.div`
+const Actions = styled.div`
+  padding: .5rem 1rem;
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: .5rem;
@@ -34,25 +35,25 @@ const DangerButton = styled(Button)`
 `;
 
 interface Props {
-    id: string,
-    status: OrderStatus
+  id: string,
+  status: OrderStatus
 }
 
-export const OrderActions = ({id, status} : Props) => {
-    const dispatch = useDispatch();
+export const OrderActions = ({ id, status }: Props) => {
+  const dispatch = useDispatch();
 
 
-    return (
-        <Options>
-            <Button onClick={() => dispatch(updateOrderStatus({
-                id: id,
-                status: status === 'pending' ? 'cooking' : 'ready'
-            }))}>
-                {status === 'pending' ? 'Iniciar' : 'Finalizar'}
-            </Button>
-            <DangerButton onClick={() => ''}>
-                Cancelar
-            </DangerButton>
-        </Options>
-    )
+  return (
+    <Actions>
+      <Button onClick={() => dispatch(updateOrderStatus({
+        id: id,
+        status: status === 'pending' ? 'cooking' : 'ready'
+      }))}>
+        {status === 'pending' ? 'Iniciar' : 'Finalizar'}
+      </Button>
+      <DangerButton onClick={() => ''}>
+        Cancelar
+      </DangerButton>
+    </Actions>
+  )
 }

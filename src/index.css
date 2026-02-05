@@ -1,3 +1,10 @@
+:root{
+    --color-pending: #9ca0a5;
+    --color-cooking: #f59e0b;
+    --color-ready: #22c55e;
+
+}
+
 * {
     margin: 0;
     padding: 0;

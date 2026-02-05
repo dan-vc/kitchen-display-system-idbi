@@ -12,28 +12,14 @@ const Card = styled.div<{ $status: string }>`
   background-color: white;
   border-radius: 4px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
   border: 2px solid;
-  border-top: 5px solid;
   border-color: ${props =>
-    props.$status === 'ready' ? '#22c55e' :
-      props.$status === 'cooking' ? '#f59e0b' :
-        '#9ca0a5'};
+    props.$status === 'ready' ? 'var(--color-ready)' :
+    props.$status === 'cooking' ? 'var(--color-cooking)' :
+    'var(--color-pending)'};
   opacity: ${props => props.$status === 'ready' ? .9 : 1};
-  user-select: ${props => props.$status === 'ready' ? 'none' : 'initial'};
-`;
-
-const CompletedTag = styled.span`
-  font-size: 1rem;
-  border: 1px solid #22c55e;
-  color: #22c55e;
-  font-weight: 600;
-  border-radius: 6px;
-  text-align: center;
-  padding: 10px;
 `;
 
 interface Props {
@@ -49,6 +35,7 @@ export const OrderCard = ({ order }: Props) => {
     <Card $status={order.status}>
       <OrderHeader
         type={order.type}
+        status={order.status}
         tableNumber={order.tableNumber}
         customer={order.customer}
         timeString={timeString}
@@ -65,9 +52,7 @@ export const OrderCard = ({ order }: Props) => {
           status={order.status}
         />
         :
-        <CompletedTag>
-          Lista para servir
-        </CompletedTag>
+        ''
       }
 
     </Card>

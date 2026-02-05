@@ -4,8 +4,7 @@ import type { OrderItem } from "../../types"
 
 const ItemList = styled.ul`
   list-style: none;
-  padding: 0;
-  margin: 0;
+  padding: .5rem 1rem;
   flex-grow: 1;
 `;
 
