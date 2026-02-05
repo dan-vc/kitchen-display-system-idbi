@@ -3,10 +3,10 @@ export type OrderStatus = 'pending' | 'cooking' | 'ready';
 export type OrderType = 'local' | 'delivery' | 'takeout';
 
 export interface OrderItem {
-    id: string;
-    name: string;
-    quantity: number;
-    notes?: string;
+  id: string;
+  name: string;
+  quantity: number;
+  notes?: string;
 }
 
 export interface Order {
@@ -17,4 +17,9 @@ export interface Order {
   items: OrderItem[];
   status: OrderStatus;
   startTime: number;
+}
+
+export interface OrdersState {
+  orders: Order[];
+  filter: OrderStatus | 'all';
 }
