@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 export const Button = styled.button`
   font-size: 1rem;
-  background-color: #3b82f6;
+  background-color: #FF9900;
   color: white;
   border: none;
   padding: 10px;

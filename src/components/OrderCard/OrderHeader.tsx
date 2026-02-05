@@ -28,7 +28,6 @@ const TableInfo = styled.div``;
 const OrderInfo = styled.div`
 display: flex;
 flex-direction: column;
-align-items: right;
 text-align: right;
 `;
 
@@ -46,11 +45,13 @@ color: #f5f5f5;
 
 const OrderNumber = styled.span`
 font-size: 0.85rem;
+font-family: "Roboto Mono", monospace;
 `;
 
 const TimeText = styled.span`
 font-size: 0.9rem;
 color: #f5f5f5;
+font-family: "Roboto Mono", monospace;
 `;
 
 // Tipado de Props

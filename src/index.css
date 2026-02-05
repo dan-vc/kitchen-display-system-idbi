@@ -1,7 +1,7 @@
 :root{
-    --color-pending: #9ca0a5;
-    --color-cooking: #e69100;
-    --color-ready: #02bb46;
+    --color-pending: #aaaaaa;
+    --color-cooking: #FF9900;
+    --color-ready: #003366;
     --color-danger: #f63b3b;
     
     --color-pending-hover: #8e9297;
@@ -9,11 +9,12 @@
     --color-ready-hover: #01a13c;
     --color-danger-hover: #eb2525;
 
+
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins';
+    font-family: 'Montserrat';
 }
