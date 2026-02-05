@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import type { Order, OrderStatus } from "../types"
+import type { OrderStatus } from "../types"
 import { Button } from "./ui/Button";
+import { useDispatch } from "react-redux";
+import { setFilter } from "../state/orders/ordersSlice";
 
 const Container = styled.div`
 padding: 1rem 1rem 0;
@@ -8,6 +10,11 @@ display: flex;
 justify-content: center;
 align-items: center;
 gap: .5rem;
+
+@media (max-width: 600px){
+display: grid;
+grid-template-columns: 1fr 1fr;
+}
 `;
 
 const FilterButton = styled(Button)<{$status: OrderStatus | 'all'}>`
@@ -36,10 +43,11 @@ color: #fff;
 `;
 
 interface Props {
-    orders: Order[];
+    actualFilter: OrderStatus | 'all';
 }
 
-export const OrdersFilterBar = ({ orders }: Props) => {
+export const OrdersFilterBar = ({actualFilter} : Props) => {
+    const dispatch = useDispatch();
 
     const filters: { value: OrderStatus | "all"; label: string }[] = [
         { value: "all", label: "Todos" },
@@ -48,7 +56,9 @@ export const OrdersFilterBar = ({ orders }: Props) => {
         { value: "ready", label: "Completados" },
     ];
 
-    function onFilterChange(args: OrderStatus | "all"){}
+    function onFilterChange(filter: OrderStatus | "all"){
+        dispatch(setFilter(filter));
+    }
 
     return (
         <Container>
@@ -57,6 +67,7 @@ export const OrdersFilterBar = ({ orders }: Props) => {
                     $status={filter.value}
                     key={filter.value}
                     onClick={() => onFilterChange(filter.value)}
+                    className={filter.value === actualFilter ? 'active' : ''}
                 >
                     {filter.label}
                 </FilterButton>

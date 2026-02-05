@@ -3,7 +3,7 @@ import { OrderCard } from './components/OrderCard/OrderCard';
 import type { Order, OrderStatus } from './types';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from './state/store';
-import { useEffect } from 'react';
+import { act, useEffect } from 'react';
 import { addOrder } from './state/orders/ordersSlice';
 import { OrdersFilterBar } from './components/OrdersFilterBar';
 
@@ -18,7 +18,7 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
+  padding: .5rem 1rem;
   background: #fff;
 
   @media (max-width: 600px){
@@ -28,10 +28,7 @@ const Header = styled.header`
 
 const Title = styled.h1`
   text-align: center;
-
-  @media (max-width: 600px){
-    font-size: 1.5rem;
-  }
+  font-size: 1.5rem;
 `;
 
 const CurrentOrders = styled.span`
@@ -60,12 +57,14 @@ const Wrapper = styled.div`
 function App() {
   // Obtenemos los pedidos desde el estado global
   const orders = useSelector((state: RootState) => state.orders.value);
+  const actualFilter = useSelector((state: RootState) => state.orders.filter);
+  const filteredOrders = actualFilter === 'all' ? orders : orders.filter(o => o.status === actualFilter );
 
   const dispatch = useDispatch();
 
   // Simulamos un nuevo pedido
   const testOrder: Order = {
-    id: 'ORD0001',
+    id: 'ORD4564',
     tableNumber: Math.floor(Math.random() * 20) + 1,
     type: 'local',
     customer: 'Walter White',
@@ -76,20 +75,17 @@ function App() {
       { id: 'i2', name: 'Papas Fritas', quantity: 1, notes: 'Sin sal' },
     ],
   }
-  /*   useEffect(() => {
-      const interval = setInterval(() => {
+    useEffect(() => {
+      const interval = setTimeout(() => {
         dispatch(addOrder(testOrder));
-      }, 20000);
+      }, 5000);
   
-      return () => clearInterval(interval);
-    }, []) */
+      return () => clearTimeout(interval);
+    }, [])
 
 
   // Pedidos activos (excluimos los que están listos)
-  const currentOrders = orders.reduce((count, el) => {
-    el.status === 'ready' ? '' : count++;
-    return count;
-  }, 0)
+  const currentOrders = orders.filter(o => o.status != 'ready').length;
 
   // Prioridad del pedido segun su estado
   const orderPriority: Record<OrderStatus, number> = {
@@ -99,7 +95,7 @@ function App() {
   };
 
   // Ordenamos los pedidos por prioridad y tipo
-  const sortedOrders = [...orders].sort((a, b) => {
+  const sortedOrders = [...filteredOrders].sort((a, b) => {
     // Primero por prioridad del estado
     if (orderPriority[a.status] !== orderPriority[b.status]) {
       return orderPriority[a.status] - orderPriority[b.status];
@@ -122,8 +118,8 @@ function App() {
         </CurrentOrders>
       </Header>
 
-      <OrdersFilterBar
-        orders={sortedOrders}
+      <OrdersFilterBar 
+        actualFilter={actualFilter}
       />
 
       <Wrapper>
