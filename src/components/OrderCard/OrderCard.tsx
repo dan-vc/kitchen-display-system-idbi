@@ -1,13 +1,22 @@
+/* 
+  Componente OrderCard
+
+  Este componente renderiza la tarjeta principal que muestra la información
+  de cada pedido. 
+
+  Usa los componentes:
+  - OrderHeader
+  - OrderItemsList
+  - OrderActions
+*/
+
 import styled from 'styled-components';
 import type { Order } from '../../types';
 import { OrderHeader } from './OrderHeader';
 import { OrderItemsList } from './OrderItemsList';
 import { OrderActions } from './OrderActions';
 
-/* 
-    Tarjeta principal
-    Cambios el color del borde segun el estado con props
-*/
+// Estilos
 const Card = styled.div<{ $status: string }>`
   background-color: white;
   color: #0a0a0a;
@@ -23,11 +32,12 @@ const Card = styled.div<{ $status: string }>`
   opacity: ${props => props.$status === 'ready' ? .9 : 1};
 `;
 
+// Tipado de Props
 interface Props {
   order: Order;
 }
 
-// Componente
+// Componente Funcional
 export const OrderCard = ({ order }: Props) => {
   const timeString = new Date(order.startTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   const isOrderReady = order.status === 'ready';

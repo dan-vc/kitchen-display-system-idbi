@@ -1,9 +1,18 @@
+/* 
+    Componente: OrdersFilterBar
+
+    Este componente renderiza una barra de navegación superior que permite
+    filtrar la lista de pedidos según su estado (Pendiente, En progreso, 
+    Listo, etc...)
+*/
+
 import styled from "styled-components";
 import type { OrderStatus } from "../types"
 import { Button } from "./ui/Button";
 import { useDispatch } from "react-redux";
 import { setFilter } from "../state/orders/ordersSlice";
 
+// Estilos
 const Container = styled.div`
 padding: 1rem 1rem 0;
 display: flex;
@@ -42,10 +51,12 @@ color: #fff;
 }
 `;
 
+// Tipado de Props
 interface Props {
     actualFilter: OrderStatus | 'all';
 }
 
+// Componente Funcional
 export const OrdersFilterBar = ({actualFilter} : Props) => {
     const dispatch = useDispatch();
 

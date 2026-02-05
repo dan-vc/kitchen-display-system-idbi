@@ -1,3 +1,10 @@
+/* 
+  Componente Button
+
+  Este es un componente global para la ui que renderiza un botón con 
+  estilos por defecto.
+*/
+
 import styled from "styled-components";
 
 export const Button = styled.button`

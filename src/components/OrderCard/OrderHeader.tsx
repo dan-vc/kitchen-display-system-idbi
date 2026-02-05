@@ -1,6 +1,14 @@
+/* 
+    Componente OrderHeader
+
+    Este componente renderiza el encabezado del pedido con sus detalles (tipo,
+    cliente, hora del pedido, ID del pedido)
+*/
+
 import styled from "styled-components";
 import type { OrderStatus, OrderType } from "../../types";
 
+// Estilos
 const Header = styled.div<{ $status: string }>`
 display: flex;
 justify-content: space-between;
@@ -44,6 +52,7 @@ font-size: 0.9rem;
 color: #f5f5f5;
 `;
 
+// Tipado de Props
 interface Props {
     type: OrderType;
     status: OrderStatus;
@@ -53,6 +62,7 @@ interface Props {
     id: string
 }
 
+// Componente funcional
 export const OrderHeader = ({ type, status, tableNumber, customer, timeString, id }: Props) => {
 
     return (
