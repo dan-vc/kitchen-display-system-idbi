@@ -1,15 +1,13 @@
-// src/components/OrderCard.tsx
 import styled from 'styled-components';
 import type { Order } from '../types';
 
-// Estilos
 /* 
     Tarjeta principal
     Cambios el color del borde segun el estado con props
 */
 const Card = styled.div<{ $status: string }>`
   background-color: white;
-  border-radius: 8px;
+  border-radius: 4px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   padding: 16px;
   display: flex;
@@ -164,7 +162,7 @@ export const OrderCard = ({ order }: Props) => {
       {!isOrderReady ?
         <Options>
           <Button onClick={() => alert(`Avanzar pedido ${order.tableNumber}`)}>
-            {order.status === 'pending' ? 'Empezar' : 'Finalizar'}
+            {order.status === 'pending' ? 'Iniciar' : 'Finalizar'}
           </Button>
           <DangerButton onClick={() => alert(`Cancelando pedido ${order.tableNumber}`)}>
             Cancelar

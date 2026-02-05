@@ -6,7 +6,7 @@ import { useState } from 'react';
 const Container = styled.div`
   width: 100%;
   min-height: 100vh;
-  background-color: #f8fafc;
+  background-color: #f5f5f5;
   color: #333;
 `;
 
@@ -35,9 +35,9 @@ const CurrentOrders = styled.span`
 const Wrapper = styled.div`
   padding: 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
-  margin: 0 auto;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  grid-auto-rows: minmax(350px, 1fr);
+  gap: 1rem;
 `;
 
 export const MOCK_ORDERS: Order[] = [
