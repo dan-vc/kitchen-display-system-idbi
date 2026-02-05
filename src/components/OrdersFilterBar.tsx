@@ -14,7 +14,7 @@ import { setFilter } from "../state/orders/ordersSlice";
 
 // Estilos
 const Container = styled.div`
-padding: 1rem 1rem 0;
+padding: 1rem;
 display: flex;
 justify-content: center;
 align-items: center;

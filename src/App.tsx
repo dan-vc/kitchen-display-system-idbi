@@ -15,6 +15,12 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
+  position: sticky;
+  top: 0;
+  background: #f5f5f5;
+`;
+
+const TopBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -30,6 +36,10 @@ const Header = styled.header`
 const Title = styled.h1`
   text-align: center;
   font-size: 1.5rem;
+`;
+
+const ActualTime = styled.span`
+font-family: 'Roboto mono';
 `;
 
 const CurrentOrders = styled.span`
@@ -110,19 +120,25 @@ function App() {
   return (
     <Container>
       <Header >
-        <Title>
-          ChefStack SDK
-          - {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
-        </Title>
+        <TopBar>
+          <Title>
+            ChefStack SDK
+          </Title>
 
-        <CurrentOrders>
-          {currentOrders} pedidos activos
-        </CurrentOrders>
+          <ActualTime>
+            {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+          </ActualTime>
+
+          <CurrentOrders>
+            {currentOrders} pedidos activos
+          </CurrentOrders>
+        </TopBar>
+
+        <OrdersFilterBar
+          actualFilter={actualFilter}
+        />
       </Header>
 
-      <OrdersFilterBar
-        actualFilter={actualFilter}
-      />
 
       <Wrapper>
         {sortedOrders.map((order) => (
