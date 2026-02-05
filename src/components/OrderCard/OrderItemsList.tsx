@@ -11,8 +11,11 @@ const ItemList = styled.ul`
 const Item = styled.li`
   display: flex;
   justify-content: space-between;
-  padding: 6px 0;
-  border-bottom: 1px dashed #f1f5f9;
+  padding: .5rem;
+  border-radius: 4px;
+  background: #e2e2e2d5;
+  border: 1px solid #cacaca;
+  margin-bottom: .25rem;
   font-size: 1rem;
 `;
 

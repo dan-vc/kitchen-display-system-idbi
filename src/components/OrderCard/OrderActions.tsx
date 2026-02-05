@@ -2,28 +2,13 @@ import { useDispatch } from "react-redux";
 import styled from "styled-components"
 import { updateOrderStatus } from "../../state/orders/ordersSlice";
 import type { OrderStatus } from "../../types";
+import { Button } from "../ui/Button";
 
 const Actions = styled.div`
   padding: .5rem 1rem;
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: .5rem;
-`;
-
-const Button = styled.button`
-  font-size: 1rem;
-  background-color: #3b82f6;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 6px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
-
-  &:hover {
-    background-color: #2563eb;
-  }
 `;
 
 const DangerButton = styled(Button)`

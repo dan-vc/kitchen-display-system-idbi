@@ -10,6 +10,7 @@ import { OrderActions } from './OrderActions';
 */
 const Card = styled.div<{ $status: string }>`
   background-color: white;
+  color: #0a0a0a;
   border-radius: 4px;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   display: flex;

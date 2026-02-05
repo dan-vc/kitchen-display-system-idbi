@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from './state/store';
 import { useEffect } from 'react';
 import { addOrder } from './state/orders/ordersSlice';
+import { OrdersFilterBar } from './components/OrdersFilterBar';
 
 const Container = styled.div`
   width: 100%;
@@ -27,12 +28,20 @@ const Header = styled.header`
 
 const Title = styled.h1`
   text-align: center;
+
+  @media (max-width: 600px){
+    font-size: 1.5rem;
+  }
 `;
 
 const CurrentOrders = styled.span`
   text-align: right;
   font-size: 1.25rem;
   font-weight: 600;
+
+  @media (max-width: 600px){
+    font-size: 1rem;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -41,14 +50,18 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   grid-auto-rows: minmax(350px, 1fr);
   gap: 1rem;
+
+  @media (max-width: 600px){
+    grid-template-columns: 1fr;
+  }
 `;
 
 
 function App() {
-  const dispatch = useDispatch();
   // Obtenemos los pedidos desde el estado global
   const orders = useSelector((state: RootState) => state.orders.value);
 
+  const dispatch = useDispatch();
 
   // Simulamos un nuevo pedido
   const testOrder: Order = {
@@ -63,13 +76,13 @@ function App() {
       { id: 'i2', name: 'Papas Fritas', quantity: 1, notes: 'Sin sal' },
     ],
   }
-/*   useEffect(() => {
-    const interval = setInterval(() => {
-      dispatch(addOrder(testOrder));
-    }, 20000);
-
-    return () => clearInterval(interval);
-  }, []) */
+  /*   useEffect(() => {
+      const interval = setInterval(() => {
+        dispatch(addOrder(testOrder));
+      }, 20000);
+  
+      return () => clearInterval(interval);
+    }, []) */
 
 
   // Pedidos activos (excluimos los que están listos)
@@ -77,7 +90,6 @@ function App() {
     el.status === 'ready' ? '' : count++;
     return count;
   }, 0)
-
 
   // Prioridad del pedido segun su estado
   const orderPriority: Record<OrderStatus, number> = {
@@ -109,6 +121,10 @@ function App() {
           {currentOrders} pedidos activos
         </CurrentOrders>
       </Header>
+
+      <OrdersFilterBar
+        orders={sortedOrders}
+      />
 
       <Wrapper>
         {sortedOrders.map((order) => (
