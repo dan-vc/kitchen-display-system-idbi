@@ -3,7 +3,7 @@ import { OrderCard } from './components/OrderCard/OrderCard';
 import type { Order, OrderStatus } from './types';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from './state/store';
-import { act, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { addOrder } from './state/orders/ordersSlice';
 import { OrdersFilterBar } from './components/OrdersFilterBar';
 
