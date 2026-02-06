@@ -131,7 +131,7 @@ function App() {
       <Header >
         <TopBar>
           <Title>
-            ChefStack SDK
+            ChefStack KDS
           </Title>
 
           <ActualTime>
