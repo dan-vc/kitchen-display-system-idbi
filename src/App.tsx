@@ -3,7 +3,7 @@ import { OrderCard } from './components/OrderCard/OrderCard';
 import type { Order, OrderStatus } from './types';
 import { useDispatch, useSelector } from 'react-redux';
 import type { RootState } from './state/store';
-import { useEffect } from 'react';
+import { act, useEffect, useState } from 'react';
 import { addOrder } from './state/orders/ordersSlice';
 import { OrdersFilterBar } from './components/OrdersFilterBar';
 
@@ -71,6 +71,15 @@ function App() {
   const actualFilter = useSelector((state: RootState) => state.orders.filter);
   const filteredOrders = actualFilter === 'all' ? orders : orders.filter(o => o.status === actualFilter);
 
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   const dispatch = useDispatch();
 
   // Simulamos un nuevo pedido
@@ -126,7 +135,7 @@ function App() {
           </Title>
 
           <ActualTime>
-            {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+            {time.toLocaleString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
           </ActualTime>
 
           <CurrentOrders>
